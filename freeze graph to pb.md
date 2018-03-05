@@ -2,8 +2,7 @@
 def determine_meta(model_dir, choose=None):
     if not tf.gfile.IsDirectory(model_dir):
         raise ValueError('invalid model_dir')
-    cs = tf.train.get_checkpoint_state(model_dir)
-    base_name = cs.model_checkpoint_path
+    base_name = tf.train.latest_checkpoint(model_dir)
     if choose is not None:
         i = base_name.rfind('-')
         base_name = base_name[:i+1] + str(choose)
