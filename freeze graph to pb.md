@@ -18,8 +18,6 @@ def freeze_graph(model_dir, outputs, choose=None, pb_name='frozen_model.pb'):
             raise ValueError('each value in outputs must be a name')
 
     base_name = determine_meta(model_dir, choose)
-
-    
     output_graph = os.path.join(model_dir, pb_name)
     with tf.Session(graph=tf.Graph()) as sess:
         saver = tf.train.import_meta_graph(base_name + '.meta', clear_devices=True)
